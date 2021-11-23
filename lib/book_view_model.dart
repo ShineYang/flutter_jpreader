@@ -20,23 +20,27 @@ class BookViewModel extends ChangeNotifier {
 
   Future<void> getLocalBookList() async {
     print('=============get book list=============');
-    var jsonString = await ReaderPlugin.pushToGetLocalBookList(null);
-    var booksList = (json.decode(jsonString) as List)
-        .map((data) => Book.fromJson(data))
-        .toList();
-    books.addAll(booksList);
-    notifyListeners();
+    String? jsonString = await ReaderPlugin.pushToGetLocalBookList(null);
+    if (jsonString != null) {
+      var booksList = (json.decode(jsonString) as List)
+          .map((data) => Book.fromJson(data))
+          .toList();
+      books.addAll(booksList);
+      notifyListeners();
+    }
   }
 
   Future<void> updateLocalBookList() async {
     print('=============update book list=============');
-    var jsonString = await ReaderPlugin.pushToGetLocalBookList(null);
-    books.clear();
-    var booksList = (json.decode(jsonString) as List)
-        .map((data) => Book.fromJson(data))
-        .toList();
-    books.addAll(booksList);
-    notifyListeners();
+    String? jsonString = await ReaderPlugin.pushToGetLocalBookList(null);
+    if (jsonString != null) {
+      books.clear();
+      var booksList = (json.decode(jsonString) as List)
+          .map((data) => Book.fromJson(data))
+          .toList();
+      books.addAll(booksList);
+      notifyListeners();
+    }
   }
 
   Future<String> removeBookFromLibrary(String id) async {

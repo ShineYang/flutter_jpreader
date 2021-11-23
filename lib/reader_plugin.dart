@@ -27,7 +27,7 @@ class ReaderPlugin {
   }
 
   //native db book list
-  static Future<String> pushToGetLocalBookList(Map? params) async {
+  static Future<String?> pushToGetLocalBookList(Map? params) async {
   String resultStr = await _channel.invokeMethod('get_book_list', params);
   return resultStr;
   }
