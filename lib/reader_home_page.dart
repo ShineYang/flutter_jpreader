@@ -153,18 +153,7 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> {
       },
       onLongPress: () async {
         //长按删除
-        final result = await showOkCancelAlertDialog(
-          context: context,
-          isDestructiveAction: true,
-          title: '请确认',
-          message: '将从书库中删除这本书',
-          okLabel: '删除',
-          cancelLabel: '取消',
-          defaultType: OkCancelAlertDefaultType.ok,
-        );
-        if (result == OkCancelResult.ok) {
-          _remove(book);
-        }
+        _showDeleteDialog(context, book);
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -194,6 +183,37 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> {
           ),
         ],
       ),
+    );
+  }
+
+  _showDeleteDialog(BuildContext context, Book book) {
+    Widget cancelButton = TextButton(
+      child: const Text('取消', style: TextStyle(color: Colors.grey, fontSize: 14),),
+      onPressed:  () {
+        Navigator.of(context).pop();
+      },
+    );
+    Widget continueButton = TextButton(
+      child: const Text('删除', style: TextStyle(color: Colors.redAccent, fontSize: 14),),
+      onPressed:  () {
+        _remove(book);
+      },
+    );
+
+    AlertDialog alert = AlertDialog(
+      title: const Text('请确认'),
+      content: const Text('将从书库中删除这本书'),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 
