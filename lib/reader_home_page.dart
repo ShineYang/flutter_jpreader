@@ -104,7 +104,7 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> {
             ]),
             color: Colors.blueGrey,
           ),
-          padding: const EdgeInsets.only(top: 12, left: 10, right: 10,),
+          padding: const EdgeInsets.all(12),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
