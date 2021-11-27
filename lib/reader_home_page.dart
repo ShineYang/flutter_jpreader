@@ -94,7 +94,7 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> {
   _buildBookItem(Book book) {
     ///处理无封面
     _buildBookCover(List<int>? elements) {
-      if (elements == null && elements!.isEmpty) {
+      if (elements == null) {
         return Container(
           padding: const EdgeInsets.only(top: 20, left: 5, right: 5,),
           child: Text(book.title == null ? "" : book.title!,
