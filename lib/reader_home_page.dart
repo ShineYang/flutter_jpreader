@@ -92,6 +92,23 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> {
   }
 
   _buildBookItem(Book book) {
+    ///处理无封面
+    _buildBookCover(List<int>? elements) {
+      if (elements == null && elements!.isEmpty) {
+        return Container(
+          padding: const EdgeInsets.only(top: 20, left: 5, right: 5,),
+          child: Text(book.title == null ? "" : book.title!,
+            style: const TextStyle(fontSize: 14, color: Colors.black),
+          maxLines: 3,
+          overflow: TextOverflow.ellipsis,),
+        );
+      } else {
+        return Image.memory(
+            Uint8List.fromList(elements,),
+            fit: BoxFit.cover
+        );
+      }
+    }
     return GestureDetector(
       onTap: () {
         viewModel?.openBook(book.id.toString());
@@ -115,11 +132,7 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-              child: Image.memory(
-                  Uint8List.fromList(
-                    book.cover!,
-                  ),
-                  fit: BoxFit.cover)),
+              child: _buildBookCover(book.cover)),
           const SizedBox(
             height: 8,
           ),

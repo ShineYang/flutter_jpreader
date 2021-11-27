@@ -26,11 +26,13 @@ class Book {
     identifier = json['identifier'];
     progression = json['progression'];
     ext = json['ext'];
-    cover = json['cover'].cast<int>();
+    if(json['cover'] != null){
+      cover = json['cover'].cast<int>();
+    }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['author'] = author;
     data['href'] = href;
@@ -38,7 +40,9 @@ class Book {
     data['identifier'] = identifier;
     data['progression'] = progression;
     data['ext'] = ext;
-    data['cover'] = cover;
+    if(data['cover'] != null) {
+      data['cover'] = cover;
+    }
     return data;
   }
 }
