@@ -111,13 +111,13 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> {
               Align(
                 alignment: Alignment.topLeft,
                 child: Text(book.title == null ? "" : book.title!,
-                  style: const TextStyle(fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,),
               ),
               Center(
                 child: Text(book.author == null ? "" : book.author!,
-                  style: const TextStyle(fontSize: 10, color: Color(0xFF8A7A65)),
+                  style: const TextStyle(fontSize: 12, color: Color(0xFF8A7A65), fontWeight: FontWeight.bold),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,),
               ),
