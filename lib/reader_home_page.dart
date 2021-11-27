@@ -99,10 +99,13 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> {
         return Container(
           alignment: Alignment.topCenter,
           decoration: const BoxDecoration(
-            gradient: LinearGradient(colors: [
-              Color(0xFFF4EDE4),
-              Color(0xFFE4D6C5),
-            ]),
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color(0xFFF4EDE4),
+                  Color(0xFFE4D6C5),
+                ]),
             color: Colors.blueGrey,
           ),
           padding: const EdgeInsets.all(12),
@@ -111,27 +114,39 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> {
             children: [
               Align(
                 alignment: Alignment.topLeft,
-                child: Text(book.title == null ? "" : book.title!,
-                  style: const TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold),
+                child: Text(
+                  book.title == null ? "" : book.title!,
+                  style: const TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
                   maxLines: 2,
-                  overflow: TextOverflow.ellipsis,),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
               Center(
-                child: Text(book.author == null ? "" : book.author!,
-                  style: const TextStyle(fontSize: 12, color: Color(0xFF8A7A65), fontWeight: FontWeight.bold),
+                child: Text(
+                  book.author == null ? "" : book.author!,
+                  style: const TextStyle(
+                      fontSize: 12,
+                      color: Color(0xFF8A7A65),
+                      fontWeight: FontWeight.bold),
                   maxLines: 2,
-                  overflow: TextOverflow.ellipsis,),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ],
           ),
         );
       } else {
         return Image.memory(
-            Uint8List.fromList(elements,),
-            fit: BoxFit.cover
-        );
+            Uint8List.fromList(
+              elements,
+            ),
+            fit: BoxFit.cover);
       }
     }
+
     return GestureDetector(
       onTap: () {
         viewModel?.openBook(book.id.toString());
@@ -154,8 +169,7 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-              child: _buildBookCover(book.cover)),
+          Expanded(child: _buildBookCover(book.cover)),
           const SizedBox(
             height: 8,
           ),
@@ -192,18 +206,18 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> {
   ///接收native端的更新请求
   _receiveMessage() {
     messageChannel.setMessageHandler((message) => Future<String>(() {
-      print('native book insert success');
-      switch (message) {
-        case 'update_db_success':
-          _update();
-          break;
-        default:
-        //分析回调
-          widget.callback(message!);
-          break;
-      }
-      return '';
-    }));
+          print('native book insert success');
+          switch (message) {
+            case 'update_db_success':
+              _update();
+              break;
+            default:
+              //分析回调
+              widget.callback(message!);
+              break;
+          }
+          return '';
+        }));
   }
 
   ///删除
