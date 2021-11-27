@@ -98,11 +98,11 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> {
         return Container(
           alignment: Alignment.topCenter,
           decoration: const BoxDecoration(
-            color: Colors.green
+            color: Colors.blueGrey,
           ),
           padding: const EdgeInsets.only(top: 20, left: 5, right: 5,),
           child: Text(book.title == null ? "" : book.title!,
-            style: const TextStyle(fontSize: 14, color: Colors.black),
+            style: const TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
           maxLines: 3,
           overflow: TextOverflow.ellipsis,),
         );
