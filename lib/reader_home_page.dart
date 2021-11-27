@@ -78,6 +78,7 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> {
 
   _buildBooks(BookViewModel model) {
     return GridView.builder(
+      physics: const ClampingScrollPhysics(),
       itemCount: model.books.length,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
