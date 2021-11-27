@@ -98,13 +98,30 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> {
         return Container(
           alignment: Alignment.topCenter,
           decoration: const BoxDecoration(
+            gradient: LinearGradient(colors: [
+              Color(0xFFF4EDE4),
+              Color(0xFFE4D6C5),
+            ]),
             color: Colors.blueGrey,
           ),
-          padding: const EdgeInsets.only(top: 20, left: 5, right: 5,),
-          child: Text(book.title == null ? "" : book.title!,
-            style: const TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
-          maxLines: 3,
-          overflow: TextOverflow.ellipsis,),
+          padding: const EdgeInsets.only(top: 12, left: 10, right: 10,),
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text(book.title == null ? "" : book.title!,
+                  style: const TextStyle(fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,),
+              ),
+              Center(
+                child: Text(book.author == null ? "" : book.author!,
+                  style: const TextStyle(fontSize: 10, color: Color(0xFF8A7A65)),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,),
+              ),
+            ],
+          ),
         );
       } else {
         return Image.memory(
