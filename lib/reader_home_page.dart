@@ -96,6 +96,10 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> {
     _buildBookCover(List<int>? elements) {
       if (elements == null) {
         return Container(
+          alignment: Alignment.topCenter,
+          decoration: const BoxDecoration(
+            color: Colors.green
+          ),
           padding: const EdgeInsets.only(top: 20, left: 5, right: 5,),
           child: Text(book.title == null ? "" : book.title!,
             style: const TextStyle(fontSize: 14, color: Colors.black),
