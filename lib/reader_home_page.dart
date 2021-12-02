@@ -21,11 +21,14 @@ class ReaderHomePage extends StatefulWidget {
   State<ReaderHomePage> createState() => _ReaderHomePageState();
 }
 
-class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> {
+class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> with AutomaticKeepAliveClientMixin {
   BookViewModel? viewModel;
 
   static const messageChannel =
       BasicMessageChannel('update_tunnel', StringCodec());
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -188,7 +191,7 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> {
 
   _showDeleteDialog(BuildContext context, Book book) {
     Widget cancelButton = TextButton(
-      child: const Text('取消', style: TextStyle(color: Colors.grey, fontSize: 14),),
+      child: const Text('取消', style: TextStyle(color: Colors.green, fontSize: 14),),
       onPressed:  () {
         Navigator.of(context).pop();
       },
