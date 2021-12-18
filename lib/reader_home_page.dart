@@ -200,6 +200,7 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> with Au
       child: const Text('删除', style: TextStyle(color: Colors.redAccent, fontSize: 14),),
       onPressed:  () {
         _remove(book);
+        Navigator.of(context).pop();
       },
     );
 
