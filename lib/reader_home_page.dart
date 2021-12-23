@@ -100,7 +100,8 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> with Au
   }
 
   _buildEmpty(){
-    return const Center(child: Text('📖 打开 EPUB 文件以导入', style: TextStyle(fontSize: 15, color: Color(0xFF242424)),));
+    return const Center(child: Text('📖 打开 EPUB 文件以导入', style: TextStyle(fontSize: 16, color: Color(
+        0xFF2D2D2D)),));
   }
 
   _buildBookItem(Book book) {
