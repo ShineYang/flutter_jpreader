@@ -80,19 +80,27 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> with Au
   }
 
   _buildBooks(BookViewModel model) {
-    return GridView.builder(
-      physics: const ClampingScrollPhysics(),
-      itemCount: model.books.length,
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 20,
-          childAspectRatio: 0.54),
-      itemBuilder: (BuildContext context, int index) {
-        return _buildBookItem(model.books[index]);
-      },
-    );
+    if(model.books.isNotEmpty){
+      return GridView.builder(
+        physics: const ClampingScrollPhysics(),
+        itemCount: model.books.length,
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 20,
+            childAspectRatio: 0.54),
+        itemBuilder: (BuildContext context, int index) {
+          return _buildBookItem(model.books[index]);
+        },
+      );
+    }else {
+      return _buildEmpty();
+    }
+  }
+
+  _buildEmpty(){
+    return const Center(child: Text('📖 打开 EPUB 文件以导入', style: TextStyle(fontSize: 15, color: Color(0xFF242424)),));
   }
 
   _buildBookItem(Book book) {
