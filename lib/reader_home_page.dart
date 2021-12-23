@@ -129,9 +129,9 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> with Au
                 alignment: Alignment.topLeft,
                 child: Text(
                   book.title == null ? "" : book.title!,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 18,
-                      color: widget.readerThemeData.titleColor,
+                      color: Colors.black,
                       fontWeight: FontWeight.bold),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -140,9 +140,9 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> with Au
               Center(
                 child: Text(
                   book.author == null ? "" : book.author!,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 12,
-                      color: widget.readerThemeData.subTitleColor,
+                      color: Color(0xFF8A7A65),
                       fontWeight: FontWeight.bold),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -177,8 +177,8 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> with Au
           ),
           Text(
             '${book.title}',
-            style: const TextStyle(
-                color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                color: widget.readerThemeData.titleColor, fontSize: 14, fontWeight: FontWeight.bold),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -187,8 +187,8 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> with Au
           ),
           Text(
             '${book.author}',
-            style: const TextStyle(
-              color: Color(0xffB1B1B1),
+            style: TextStyle(
+              color: widget.readerThemeData.subTitleColor,
               fontSize: 12,
             ),
             maxLines: 1,
