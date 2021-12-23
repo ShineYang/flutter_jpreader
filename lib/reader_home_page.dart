@@ -4,6 +4,7 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_jpreader/reader_theme_data.dart';
 
 import 'arch/lifecycle_watcher_state.dart';
 import 'arch/provider_widget.dart';
@@ -13,9 +14,11 @@ import 'book_view_model.dart';
 typedef _ContentCallBack = void Function(String content);
 
 class ReaderHomePage extends StatefulWidget {
-  const ReaderHomePage({Key? key, required this.callback}) : super(key: key);
 
   final _ContentCallBack callback;
+  final ReaderThemeData readerThemeData;
+
+  const ReaderHomePage({Key? key, required this.callback, required this.readerThemeData}) : super(key: key);
 
   @override
   State<ReaderHomePage> createState() => _ReaderHomePageState();
@@ -57,21 +60,21 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> with Au
               elevation: 0,
               actions: [
                 IconButton(
-                  icon: const Icon(Icons.add, color: Colors.green, size: 28),
+                  icon: Icon(Icons.add, color: widget.readerThemeData.primaryColor, size: 28),
                   onPressed: () async {
                     model.openFilePicker();
                   },
                 )
               ],
-              backgroundColor: Colors.white,
-              title: const Text('书架',
+              backgroundColor: widget.readerThemeData.backgroundColor,
+              title: Text('书架',
                   style: TextStyle(
-                    color: Colors.black,
+                    color: widget.readerThemeData.titleColor,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   )),
             ),
-            backgroundColor: Colors.white,
+            backgroundColor: widget.readerThemeData.backgroundColor,
             body: Container(
               child: _buildBooks(model),
             ));
@@ -100,8 +103,7 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> with Au
   }
 
   _buildEmpty(){
-    return const Center(child: Text('📖 打开 EPUB 文件以导入', style: TextStyle(fontSize: 16, color: Color(
-        0xFF2D2D2D)),));
+    return Center(child: Text('📖 打开 EPUB 文件以导入', style: TextStyle(fontSize: 16, color: widget.readerThemeData.subTitleColor),));
   }
 
   _buildBookItem(Book book) {
@@ -118,7 +120,6 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> with Au
                   Color(0xFFF4EDE4),
                   Color(0xFFE4D6C5),
                 ]),
-            color: Colors.blueGrey,
           ),
           padding: const EdgeInsets.all(12),
           child: Column(
@@ -128,9 +129,9 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> with Au
                 alignment: Alignment.topLeft,
                 child: Text(
                   book.title == null ? "" : book.title!,
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontSize: 18,
-                      color: Colors.black,
+                      color: widget.readerThemeData.titleColor,
                       fontWeight: FontWeight.bold),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -139,9 +140,9 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> with Au
               Center(
                 child: Text(
                   book.author == null ? "" : book.author!,
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontSize: 12,
-                      color: Color(0xFF8A7A65),
+                      color: widget.readerThemeData.subTitleColor,
                       fontWeight: FontWeight.bold),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -200,7 +201,7 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> with Au
 
   _showDeleteDialog(BuildContext context, Book book) {
     Widget cancelButton = TextButton(
-      child: const Text('取消', style: TextStyle(color: Colors.green, fontSize: 14),),
+      child: Text('取消', style: TextStyle(color: widget.readerThemeData.subTitleColor, fontSize: 14),),
       onPressed:  () {
         Navigator.of(context).pop();
       },
@@ -214,6 +215,7 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> with Au
     );
 
     AlertDialog alert = AlertDialog(
+      backgroundColor: widget.readerThemeData.backgroundColor,
       title: const Text('请确认'),
       content: const Text('将从书库中删除这本书'),
       actions: [
