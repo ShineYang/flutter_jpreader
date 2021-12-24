@@ -1,0 +1,8 @@
+{
+  "appbarTitle": "书架",
+  "emptyTips": "📖 打开 EPUB 文件以导入",
+  "cancel": "取消",
+  "delete": "删除",
+  "confirmDeleteTitle": "请确认",
+  "confirmDelete": "将从书库中删除这本书"
+}

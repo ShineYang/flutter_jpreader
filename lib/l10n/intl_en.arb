@@ -1,0 +1,8 @@
+{
+  "appbarTitle": "Library",
+  "emptyTips": "📖 Please Import EPUB File",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "confirmDeleteTitle": "Confirm",
+  "confirmDelete": "This Action Will Delete This Book"
+}
