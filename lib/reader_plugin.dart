@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 
 class ReaderPlugin {
   static const MethodChannel _channel =
-      const MethodChannel('reader_plugin');
+      MethodChannel('reader_plugin');
 
   //flutter initialization completed and notify native
   //NOTE: native flutterEngine must called after flutter initialization completed
