@@ -1,4 +1,5 @@
 {
+  "@@locale": "en",
   "appbarTitle": "Library",
   "emptyTips": "📖 Please Import EPUB File",
   "cancel": "Cancel",
