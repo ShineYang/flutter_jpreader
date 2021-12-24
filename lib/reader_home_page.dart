@@ -216,8 +216,8 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage> with Au
 
     AlertDialog alert = AlertDialog(
       backgroundColor: widget.readerThemeData.backgroundColor,
-      title: const Text('请确认'),
-      content: const Text('将从书库中删除这本书'),
+      title: Text('请确认', style: TextStyle(color: widget.readerThemeData.titleColor, fontSize: 16),),
+      content: Text('将从书库中删除这本书', style: TextStyle(color: widget.readerThemeData.titleColor, fontSize: 14),),
       actions: [
         cancelButton,
         continueButton,
