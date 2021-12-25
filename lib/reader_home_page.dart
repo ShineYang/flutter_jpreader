@@ -55,45 +55,31 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
         viewModel?.getLocalBookList();
       },
       builder: (ctx, model, child) {
-        return MaterialApp(
-          localizationsDelegates: const [
-            S.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-          ],
-          supportedLocales: S.delegate.supportedLocales,
-          localeResolutionCallback: (locale, supportLocales) {
-            if (locale?.languageCode == 'zh') {
-              return const Locale('zh', 'CN');
-            }
-            return const Locale('en', 'US');
-          },
-          home: Scaffold(
-              appBar: AppBar(
-                centerTitle: true,
-                elevation: 0,
-                actions: [
-                  IconButton(
-                    icon: Icon(Icons.add,
-                        color: widget.readerThemeData.primaryColor, size: 28),
-                    onPressed: () async {
-                      model.openFilePicker();
-                    },
-                  )
-                ],
-                backgroundColor: widget.readerThemeData.backgroundColor,
-                title: Text(S.of(context).appbarTitle,
-                    style: TextStyle(
-                      color: widget.readerThemeData.titleColor,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    )),
-              ),
+        return Scaffold(
+            appBar: AppBar(
+              centerTitle: true,
+              elevation: 0,
+              actions: [
+                IconButton(
+                  icon: Icon(Icons.add,
+                      color: widget.readerThemeData.primaryColor, size: 28),
+                  onPressed: () async {
+                    model.openFilePicker();
+                  },
+                )
+              ],
               backgroundColor: widget.readerThemeData.backgroundColor,
-              body: Container(
-                child: _buildBooks(model),
-              )),
-        );
+              title: Text(S.of(context).appbarTitle,
+                  style: TextStyle(
+                    color: widget.readerThemeData.titleColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  )),
+            ),
+            backgroundColor: widget.readerThemeData.backgroundColor,
+            body: Container(
+              child: _buildBooks(model),
+            ));
       },
     );
   }
