@@ -1,5 +1,5 @@
 {
-  "@@locale": "zh",
+  "@@locale": "zh_CN",
   "appbarTitle": "书架",
   "emptyTips": "📖 打开 EPUB 文件以导入",
   "cancel": "取消",
