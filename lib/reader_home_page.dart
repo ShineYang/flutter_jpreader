@@ -184,7 +184,7 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
           ),
           Text(
             '${book.author}',
-            style: Theme.of(context).textTheme.subtitle2,
+            style: Theme.of(context).textTheme.subtitle1,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
