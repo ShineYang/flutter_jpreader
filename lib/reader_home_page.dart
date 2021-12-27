@@ -1,11 +1,8 @@
 import 'dart:typed_data';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_jpreader/reader_app.dart';
 import 'package:flutter_jpreader/reader_theme_data.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-
 import 'arch/lifecycle_watcher_state.dart';
 import 'arch/provider_widget.dart';
 import 'book_entity.dart';
@@ -14,10 +11,8 @@ import 'generated/l10n.dart';
 
 class ReaderHomePage extends StatefulWidget {
   final ContentCallBack callback;
-  final ReaderThemeData readerThemeData;
-
   const ReaderHomePage(
-      {Key? key, required this.callback, required this.readerThemeData})
+      {Key? key, required this.callback})
       : super(key: key);
 
   @override
@@ -27,6 +22,7 @@ class ReaderHomePage extends StatefulWidget {
 class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
     with AutomaticKeepAliveClientMixin {
   BookViewModel? viewModel;
+  late ReaderThemeData readerThemeData;
 
   static const messageChannel =
       BasicMessageChannel('update_tunnel', StringCodec());
@@ -62,21 +58,17 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
               actions: [
                 IconButton(
                   icon: Icon(Icons.add,
-                      color: widget.readerThemeData.primaryColor, size: 28),
+                      color: Theme.of(context).primaryColor, size: 28),
                   onPressed: () async {
                     model.openFilePicker();
                   },
                 )
               ],
-              backgroundColor: widget.readerThemeData.backgroundColor,
+              backgroundColor: Theme.of(context).backgroundColor,
               title: Text(S.of(context).appbarTitle,
-                  style: TextStyle(
-                    color: widget.readerThemeData.titleColor,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  )),
+                  style: Theme.of(context).textTheme.headline1),
             ),
-            backgroundColor: widget.readerThemeData.backgroundColor,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             body: Container(
               child: _buildBooks(model),
             ));
@@ -108,8 +100,7 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
     return Center(
         child: Text(
       S.of(context).emptyTips,
-      style:
-          TextStyle(fontSize: 16, color: widget.readerThemeData.subTitleColor),
+      style:Theme.of(context).textTheme.subtitle1!.copyWith(fontSize: 16),
     ));
   }
 
@@ -184,10 +175,7 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
           ),
           Text(
             '${book.title}',
-            style: TextStyle(
-                color: widget.readerThemeData.titleColor,
-                fontSize: 14,
-                fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.bodyText1,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -196,10 +184,7 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
           ),
           Text(
             '${book.author}',
-            style: TextStyle(
-              color: widget.readerThemeData.subTitleColor,
-              fontSize: 12,
-            ),
+            style: Theme.of(context).textTheme.subtitle2,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -212,8 +197,7 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
     Widget cancelButton = TextButton(
       child: Text(
         S.of(context).cancel,
-        style: TextStyle(
-            color: widget.readerThemeData.subTitleColor, fontSize: 14),
+        style: Theme.of(context).textTheme.subtitle1!.copyWith(fontSize: 14),
       ),
       onPressed: () {
         Navigator.of(context).pop();
@@ -231,16 +215,14 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
     );
 
     AlertDialog alert = AlertDialog(
-      backgroundColor: widget.readerThemeData.backgroundColor,
+      backgroundColor: Theme.of(context).backgroundColor,
       title: Text(
         S.of(context).confirmDeleteTitle,
-        style:
-            TextStyle(color: widget.readerThemeData.titleColor, fontSize: 16),
+        style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 16),
       ),
       content: Text(
         S.of(context).confirmDelete,
-        style:
-            TextStyle(color: widget.readerThemeData.titleColor, fontSize: 14),
+        style: Theme.of(context).textTheme.bodyText1,
       ),
       actions: [
         cancelButton,

@@ -1,25 +1,20 @@
-import 'dart:typed_data';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_jpreader/reader_home_page.dart';
 import 'package:flutter_jpreader/reader_theme_data.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'arch/lifecycle_watcher_state.dart';
-import 'arch/provider_widget.dart';
-import 'book_entity.dart';
-import 'book_view_model.dart';
 import 'generated/l10n.dart';
 
 typedef ContentCallBack = void Function(String content);
 
 class ReaderAppPage extends StatefulWidget {
   final ContentCallBack callback;
-  final ReaderThemeData readerThemeData;
+  final ReaderThemeData readerLightThemeData;
+  final ReaderThemeData readerDarkThemeData;
 
   const ReaderAppPage(
-      {Key? key, required this.callback, required this.readerThemeData})
+      {Key? key, required this.callback, required this.readerLightThemeData, required this.readerDarkThemeData})
       : super(key: key);
 
   @override
@@ -28,6 +23,7 @@ class ReaderAppPage extends StatefulWidget {
 
 class _ReaderAppPageState extends LifecycleWatcherState<ReaderAppPage>
     with AutomaticKeepAliveClientMixin {
+
   @override
   bool get wantKeepAlive => true;
 
@@ -51,11 +47,31 @@ class _ReaderAppPageState extends LifecycleWatcherState<ReaderAppPage>
         }
         return const Locale('en', 'US');
       },
+      themeMode: ThemeMode.system,
+      theme: ThemeData(
+        backgroundColor: widget.readerLightThemeData.backgroundColor,
+        scaffoldBackgroundColor: widget.readerLightThemeData.backgroundColor,
+        primaryColor: widget.readerLightThemeData.primaryColor,
+        textTheme:  TextTheme(
+          headline1: const TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold,),
+          bodyText1: const TextStyle(fontSize: 14, color: Colors.black, fontWeight: FontWeight.bold),//title
+          subtitle1: TextStyle(fontSize: 12, color: widget.readerLightThemeData.subTitleColor),//author subtitle
+        ),
+      ),
+      darkTheme: ThemeData(
+        backgroundColor: widget.readerDarkThemeData.backgroundColor,
+        scaffoldBackgroundColor: widget.readerDarkThemeData.backgroundColor,
+      primaryColor: widget.readerDarkThemeData.primaryColor,
+      textTheme: TextTheme(
+        headline1: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold,),
+        bodyText1: const TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),//title
+        subtitle1: TextStyle(fontSize: 12, color: widget.readerDarkThemeData.subTitleColor),//author subtitle
+      ),
+    ),
       home: ReaderHomePage(
         callback: (content) {
           widget.callback(content);
         },
-        readerThemeData: widget.readerThemeData,
       ),
     );
   }
@@ -76,4 +92,7 @@ class _ReaderAppPageState extends LifecycleWatcherState<ReaderAppPage>
 
   @override
   void onResumed() {}
+
 }
+
+
