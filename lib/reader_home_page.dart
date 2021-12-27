@@ -58,17 +58,17 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
               actions: [
                 IconButton(
                   icon: Icon(Icons.add,
-                      color: Theme.of(context).primaryColor, size: 28),
+                      color: Theme.of(context).colorScheme.primary, size: 28),
                   onPressed: () async {
                     model.openFilePicker();
                   },
                 )
               ],
-              backgroundColor: Theme.of(context).backgroundColor,
+              backgroundColor: Theme.of(context).colorScheme.background,
               title: Text(S.of(context).appbarTitle,
                   style: Theme.of(context).textTheme.headline1),
             ),
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            backgroundColor: Theme.of(context).colorScheme.background,
             body: Container(
               child: _buildBooks(model),
             ));
@@ -100,7 +100,7 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
     return Center(
         child: Text(
       S.of(context).emptyTips,
-      style:Theme.of(context).textTheme.subtitle1!.copyWith(fontSize: 16),
+      style:Theme.of(context).textTheme.subtitle1!.copyWith(fontSize: 16, color: Theme.of(context).colorScheme.secondary),
     ));
   }
 
@@ -184,7 +184,7 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
           ),
           Text(
             '${book.author}',
-            style: Theme.of(context).textTheme.subtitle1,
+            style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Theme.of(context).colorScheme.secondary),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -215,7 +215,7 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
     );
 
     AlertDialog alert = AlertDialog(
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       title: Text(
         S.of(context).confirmDeleteTitle,
         style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 16),

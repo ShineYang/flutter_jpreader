@@ -34,6 +34,38 @@ class _ReaderAppPageState extends LifecycleWatcherState<ReaderAppPage>
 
   @override
   Widget build(BuildContext context) {
+    ColorScheme lightColorScheme = ColorScheme(
+      primary: widget.readerLightThemeData.primaryColor,
+      primaryVariant: widget.readerLightThemeData.primaryColor,
+      secondary: widget.readerLightThemeData.subTitleColor,
+      secondaryVariant: widget.readerLightThemeData.primaryColor,
+      background: widget.readerLightThemeData.backgroundColor,
+      surface: widget.readerLightThemeData.primaryColor,
+      onBackground: Colors.white,
+      error: Colors.redAccent,
+      onError: Colors.redAccent,
+      onPrimary: Colors.redAccent,
+      onSecondary: widget.readerLightThemeData.primaryColor,
+      onSurface: widget.readerLightThemeData.primaryColor,
+      brightness: Brightness.light,
+    );
+
+    ColorScheme darkColorScheme = ColorScheme(
+      primary: widget.readerDarkThemeData.primaryColor,
+      primaryVariant: widget.readerDarkThemeData.primaryColor,
+      secondary: widget.readerDarkThemeData.subTitleColor,
+      secondaryVariant: widget.readerDarkThemeData.primaryColor,
+      background: widget.readerDarkThemeData.backgroundColor,
+      surface: widget.readerDarkThemeData.primaryColor,
+      onBackground: Colors.white,
+      error: Colors.redAccent,
+      onError: Colors.redAccent,
+      onPrimary: Colors.redAccent,
+      onSecondary: widget.readerDarkThemeData.primaryColor,
+      onSurface: widget.readerDarkThemeData.primaryColor,
+      brightness: Brightness.light,
+    );
+
     return MaterialApp(
       localizationsDelegates: const [
         S.delegate,
@@ -49,25 +81,21 @@ class _ReaderAppPageState extends LifecycleWatcherState<ReaderAppPage>
       },
       themeMode: ThemeMode.system,
       theme: ThemeData(
-        backgroundColor: widget.readerLightThemeData.backgroundColor,
-        scaffoldBackgroundColor: widget.readerLightThemeData.backgroundColor,
-        primaryColor: widget.readerLightThemeData.primaryColor,
-        textTheme:  TextTheme(
-          headline1: const TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold,),
-          bodyText1: const TextStyle(fontSize: 14, color: Colors.black, fontWeight: FontWeight.bold),//title
-          subtitle1: TextStyle(fontSize: 12, color: widget.readerLightThemeData.subTitleColor),//author subtitle
+        colorScheme: lightColorScheme,
+        textTheme: const TextTheme(
+          headline1: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold,),
+          bodyText1: TextStyle(fontSize: 14, color: Colors.black, fontWeight: FontWeight.bold),//title
+          subtitle1: TextStyle(fontSize: 12),//author subtitle
         ),
       ),
       darkTheme: ThemeData(
-        backgroundColor: widget.readerDarkThemeData.backgroundColor,
-        scaffoldBackgroundColor: widget.readerDarkThemeData.backgroundColor,
-      primaryColor: widget.readerDarkThemeData.primaryColor,
-      textTheme: TextTheme(
-        headline1: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold,),
-        bodyText1: const TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),//title
-        subtitle1: TextStyle(fontSize: 12, color: widget.readerDarkThemeData.subTitleColor),//author subtitle
+        colorScheme: darkColorScheme,
+        textTheme: const TextTheme(
+          headline1: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold,),
+          bodyText1: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),//title
+          subtitle1: TextStyle(fontSize: 12),//author subtitle
+        ),
       ),
-    ),
       home: ReaderHomePage(
         callback: (content) {
           widget.callback(content);
