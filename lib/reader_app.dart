@@ -14,7 +14,10 @@ class ReaderAppPage extends StatefulWidget {
   final ReaderThemeData readerDarkThemeData;
 
   const ReaderAppPage(
-      {Key? key, required this.callback, required this.readerLightThemeData, required this.readerDarkThemeData})
+      {Key? key,
+      required this.callback,
+      required this.readerLightThemeData,
+      required this.readerDarkThemeData})
       : super(key: key);
 
   @override
@@ -23,7 +26,6 @@ class ReaderAppPage extends StatefulWidget {
 
 class _ReaderAppPageState extends LifecycleWatcherState<ReaderAppPage>
     with AutomaticKeepAliveClientMixin {
-
   @override
   bool get wantKeepAlive => true;
 
@@ -75,7 +77,14 @@ class _ReaderAppPageState extends LifecycleWatcherState<ReaderAppPage>
       supportedLocales: S.delegate.supportedLocales,
       localeResolutionCallback: (locale, supportLocales) {
         if (locale?.languageCode == 'zh') {
-          return const Locale('zh', 'CN');
+          if (locale?.scriptCode == 'Hant' ||
+              locale?.countryCode == 'TW' ||
+              locale?.countryCode == 'HK' ||
+              locale?.countryCode == 'MO') {
+            return const Locale('zh', 'TW'); //繁体
+          } else {
+            return const Locale('zh', 'CN'); //简体
+          }
         }
         return const Locale('en', 'US');
       },
@@ -83,17 +92,31 @@ class _ReaderAppPageState extends LifecycleWatcherState<ReaderAppPage>
       theme: ThemeData(
         colorScheme: lightColorScheme,
         textTheme: const TextTheme(
-          headline1: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold,),
-          bodyText1: TextStyle(fontSize: 14, color: Colors.black, fontWeight: FontWeight.bold),//title
-          subtitle1: TextStyle(fontSize: 12),//author subtitle
+          headline1: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+          bodyText1: TextStyle(
+              fontSize: 14,
+              color: Colors.black,
+              fontWeight: FontWeight.bold), //title
+          subtitle1: TextStyle(fontSize: 12), //author subtitle
         ),
       ),
       darkTheme: ThemeData(
         colorScheme: darkColorScheme,
         textTheme: const TextTheme(
-          headline1: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold,),
-          bodyText1: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),//title
-          subtitle1: TextStyle(fontSize: 12),//author subtitle
+          headline1: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+          bodyText1: TextStyle(
+              fontSize: 14,
+              color: Colors.white,
+              fontWeight: FontWeight.bold), //title
+          subtitle1: TextStyle(fontSize: 12), //author subtitle
         ),
       ),
       home: ReaderHomePage(
@@ -120,7 +143,4 @@ class _ReaderAppPageState extends LifecycleWatcherState<ReaderAppPage>
 
   @override
   void onResumed() {}
-
 }
-
-

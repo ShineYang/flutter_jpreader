@@ -50,60 +50,60 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Library`
+  /// `书架`
   String get appbarTitle {
     return Intl.message(
-      'Library',
+      '书架',
       name: 'appbarTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `📖 Please Import EPUB File`
+  /// `📖 打开 EPUB 文件以导入`
   String get emptyTips {
     return Intl.message(
-      '📖 Please Import EPUB File',
+      '📖 打开 EPUB 文件以导入',
       name: 'emptyTips',
       desc: '',
       args: [],
     );
   }
 
-  /// `Cancel`
+  /// `取消`
   String get cancel {
     return Intl.message(
-      'Cancel',
+      '取消',
       name: 'cancel',
       desc: '',
       args: [],
     );
   }
 
-  /// `Delete`
+  /// `删除`
   String get delete {
     return Intl.message(
-      'Delete',
+      '删除',
       name: 'delete',
       desc: '',
       args: [],
     );
   }
 
-  /// `Confirm`
+  /// `请确认`
   String get confirmDeleteTitle {
     return Intl.message(
-      'Confirm',
+      '请确认',
       name: 'confirmDeleteTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `This Action Will Delete This Book`
+  /// `将从书库中删除这本书`
   String get confirmDelete {
     return Intl.message(
-      'This Action Will Delete This Book',
+      '将从书库中删除这本书',
       name: 'confirmDelete',
       desc: '',
       args: [],
@@ -118,6 +118,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
       Locale.fromSubtags(languageCode: 'zh', countryCode: 'CN'),
+      Locale.fromSubtags(languageCode: 'zh', countryCode: 'TW'),
     ];
   }
 

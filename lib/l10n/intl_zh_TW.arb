@@ -1,0 +1,9 @@
+{
+  "@@locale": "zh_TW",
+  "appbarTitle": "書架",
+  "emptyTips": "📖 打開 EPUB 文件以導入",
+  "cancel": "取消",
+  "delete": "刪除",
+  "confirmDeleteTitle": "請確認",
+  "confirmDelete": "將從書庫中刪除這本書"
+}
