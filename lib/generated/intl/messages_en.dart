@@ -22,13 +22,11 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "appbarTitle": MessageLookupByLibrary.simpleMessage("Library"),
-        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
-        "confirmDelete": MessageLookupByLibrary.simpleMessage(
-            "This Action Will Delete This Book"),
-        "confirmDeleteTitle": MessageLookupByLibrary.simpleMessage("Confirm"),
-        "delete": MessageLookupByLibrary.simpleMessage("Delete"),
-        "emptyTips":
-            MessageLookupByLibrary.simpleMessage("📖 Please Import EPUB File")
+        "appbarTitle": MessageLookupByLibrary.simpleMessage("书架"),
+        "cancel": MessageLookupByLibrary.simpleMessage("取消"),
+        "confirmDelete": MessageLookupByLibrary.simpleMessage("将从书库中删除这本书"),
+        "confirmDeleteTitle": MessageLookupByLibrary.simpleMessage("请确认"),
+        "delete": MessageLookupByLibrary.simpleMessage("删除"),
+        "emptyTips": MessageLookupByLibrary.simpleMessage("📖 打开 EPUB 文件以导入")
       };
 }
