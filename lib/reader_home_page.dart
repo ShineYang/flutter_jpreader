@@ -86,7 +86,7 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
             mainAxisSpacing: 20,
             childAspectRatio: 0.54),
         itemBuilder: (BuildContext context, int index) {
-          return _buildBookItem(model.books[index]);
+          return _buildBookItem(context, model.books[index]);
         },
       );
     } else {
@@ -103,7 +103,7 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
     ));
   }
 
-  _buildBookItem(Book book) {
+  _buildBookItem(BuildContext context, Book book) {
     ///处理无封面
     _buildBookCover(List<int>? elements) {
       if (elements == null) {
