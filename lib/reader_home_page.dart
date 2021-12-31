@@ -163,7 +163,11 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
       },
       onLongPress: () async {
         //长按删除
-        _showDeleteDialog(context, book);
+        bool? delete = await _showDeleteConfirmDialog(context, book);
+        if (delete != null && delete) {
+          //删除文件
+          _remove(book);
+        }
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -195,48 +199,40 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
     );
   }
 
-  _showDeleteDialog(BuildContext context, Book book) {
-    Widget cancelButton = TextButton(
-      child: Text(
-        S.of(context).cancel,
-        style: Theme.of(context).textTheme.subtitle1!.copyWith(fontSize: 14),
-      ),
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-    );
-    Widget continueButton = TextButton(
-      child: Text(
-        S.of(context).delete,
-        style: const TextStyle(color: Colors.redAccent, fontSize: 14),
-      ),
-      onPressed: () {
-        Navigator.of(context).pop();
-        _remove(book);
-      },
-    );
-
-    AlertDialog alert = AlertDialog(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      title: Text(
-        S.of(context).confirmDeleteTitle,
-        style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 16),
-      ),
-      content: Text(
-        S.of(context).confirmDelete,
-        style: Theme.of(context).textTheme.bodyText1,
-      ),
-      actions: [
-        cancelButton,
-        continueButton,
-      ],
-    );
-
-    showDialog(
+  Future<bool?> _showDeleteConfirmDialog(BuildContext context, Book book) {
+    return showDialog<bool>(
       context: context,
-      useRootNavigator: false,
-      builder: (BuildContext context) {
-        return alert;
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.background,
+          title: Text(
+            S.of(context).confirmDeleteTitle,
+            style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 16),
+          ),
+          content: Text(
+            S.of(context).confirmDelete,
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                S.of(context).cancel,
+                style: Theme.of(context).textTheme.subtitle1!.copyWith(fontSize: 14),
+              ),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+
+            TextButton(
+              child: Text(
+                S.of(context).delete,
+                style: const TextStyle(color: Colors.redAccent, fontSize: 14),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+            )
+          ],
+        );
       },
     );
   }
