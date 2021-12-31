@@ -238,15 +238,12 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
   }
 
   _update() {
-    setState(() {
-      viewModel?.updateLocalBookList();
-    });
+    viewModel?.updateLocalBookList();
   }
 
   ///接收native端的更新请求
   _receiveMessage() {
     messageChannel.setMessageHandler((message) => Future<String>(() {
-          print('native book insert success');
           switch (message) {
             case 'update_db_success':
               _update();
@@ -287,6 +284,6 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
 
   @override
   void onResumed() {
-    _update();
+    // _update();
   }
 }
