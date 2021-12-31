@@ -34,6 +34,7 @@ class BookViewModel extends ChangeNotifier {
   Future<void> updateLocalBookList() async {
     print('=============update book list=============');
     String? jsonString = await ReaderPlugin.pushToGetLocalBookList(null);
+    print('=============update $jsonString =============');
     if (jsonString != null) {
       books.clear();
       var booksList = (json.decode(jsonString) as List)
