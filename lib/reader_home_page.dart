@@ -11,9 +11,7 @@ import 'generated/l10n.dart';
 
 class ReaderHomePage extends StatefulWidget {
   final ContentCallBack callback;
-  const ReaderHomePage(
-      {Key? key, required this.callback})
-      : super(key: key);
+  const ReaderHomePage({Key? key, required this.callback}) : super(key: key);
 
   @override
   State<ReaderHomePage> createState() => _ReaderHomePageState();
@@ -100,7 +98,8 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
     return Center(
         child: Text(
       S.of(context).emptyTips,
-      style:Theme.of(context).textTheme.subtitle1!.copyWith(fontSize: 16, color: Theme.of(context).colorScheme.secondary),
+      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+          fontSize: 16, color: Theme.of(context).colorScheme.secondary),
     ));
   }
 
@@ -184,7 +183,10 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
           ),
           Text(
             '${book.author}',
-            style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Theme.of(context).colorScheme.secondary),
+            style: Theme.of(context)
+                .textTheme
+                .subtitle1!
+                .copyWith(color: Theme.of(context).colorScheme.secondary),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -232,6 +234,7 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
 
     showDialog(
       context: context,
+      useRootNavigator: false,
       builder: (BuildContext context) {
         return alert;
       },

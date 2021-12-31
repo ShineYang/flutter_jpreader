@@ -1,5 +1,5 @@
 // DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
-// This is a library that provides messages for a en locale. All the
+// This is a library that provides messages for a zh_TW locale. All the
 // messages from the main program should be duplicated here with the same
 // function name.
 
@@ -18,15 +18,15 @@ final messages = new MessageLookup();
 typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  String get localeName => 'en';
+  String get localeName => 'zh_TW';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "appbarTitle": MessageLookupByLibrary.simpleMessage("书架"),
+        "appbarTitle": MessageLookupByLibrary.simpleMessage("書架"),
         "cancel": MessageLookupByLibrary.simpleMessage("取消"),
-        "confirmDelete": MessageLookupByLibrary.simpleMessage("将从书库中删除这本书"),
-        "confirmDeleteTitle": MessageLookupByLibrary.simpleMessage("请确认"),
-        "delete": MessageLookupByLibrary.simpleMessage("删除"),
-        "emptyTips": MessageLookupByLibrary.simpleMessage("📖 打开 EPUB 文件以导入")
+        "confirmDelete": MessageLookupByLibrary.simpleMessage("將從書庫中刪除這本書"),
+        "confirmDeleteTitle": MessageLookupByLibrary.simpleMessage("請確認"),
+        "delete": MessageLookupByLibrary.simpleMessage("刪除"),
+        "emptyTips": MessageLookupByLibrary.simpleMessage("📖 打開 EPUB 文件以導入")
       };
 }
