@@ -274,7 +274,6 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
   @override
   void dispose() {
     super.dispose();
-    viewModel?.dispose();
   }
 
   @override
