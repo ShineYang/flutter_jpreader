@@ -6,6 +6,7 @@ import 'package:flutter_jpreader/reader_plugin.dart';
 import 'book_entity.dart';
 
 class BookViewModel extends ChangeNotifier {
+  bool _disposed = false;
   List<Book> books = [];
 
   Future<void> notifyNative() async {
@@ -51,5 +52,18 @@ class BookViewModel extends ChangeNotifier {
   Future<void> openFilePicker() async {
     print('=============Open picker=============');
     await ReaderPlugin.pushToOpenFilePicker(null);
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
+  }
+
+  @override
+  void notifyListeners() {
+    if (!_disposed) {
+      super.notifyListeners();
+    }
   }
 }
