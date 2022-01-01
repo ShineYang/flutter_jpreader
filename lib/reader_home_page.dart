@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,8 +6,9 @@ import 'package:flutter_jpreader/reader_app.dart';
 import 'package:flutter_jpreader/reader_theme_data.dart';
 import 'arch/lifecycle_watcher_state.dart';
 import 'arch/provider_widget.dart';
-import 'book_entity.dart';
+import 'entity/book_entity.dart';
 import 'book_view_model.dart';
+import 'entity/channel_event.dart';
 import 'generated/l10n.dart';
 
 class ReaderHomePage extends StatefulWidget {
@@ -244,14 +246,20 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
   ///接收native端的更新请求
   _receiveMessage() {
     messageChannel.setMessageHandler((message) => Future<String>(() {
-          switch (message) {
-            case 'update_db_success':
-              _update();
-              break;
-            default:
+          ChannelEvent? event = jsonDecode(message!);
+          if (event != null) {
+            switch (event.code) {
+              case 0:
               //分析回调
-              widget.callback(message!);
-              break;
+                widget.callback(event.data!);
+                break;
+              case 1:
+                //更新列表
+                _update();
+                break;
+              default:
+                break;
+            }
           }
           return '';
         }));

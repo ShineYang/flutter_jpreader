@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_jpreader/reader_plugin.dart';
 
-import 'book_entity.dart';
+import 'entity/book_entity.dart';
 
 class BookViewModel extends ChangeNotifier {
   bool _disposed = false;
