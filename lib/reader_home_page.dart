@@ -246,20 +246,18 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
   ///接收native端的更新请求
   _receiveMessage() {
     messageChannel.setMessageHandler((message) => Future<String>(() {
-          ChannelEvent? event = jsonDecode(message!);
-          if (event != null) {
-            switch (event.code) {
-              case 0:
-              //分析回调
-                widget.callback(event.data!);
-                break;
-              case 1:
-                //更新列表
-                _update();
-                break;
-              default:
-                break;
-            }
+          ChannelEvent event = ChannelEvent.fromJson(jsonDecode(message!));
+          switch (event.code) {
+            case 0:
+            //分析回调
+              widget.callback(event.data!);
+              break;
+            case 1:
+              //更新列表
+              _update();
+              break;
+            default:
+              break;
           }
           return '';
         }));
