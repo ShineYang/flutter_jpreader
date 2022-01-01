@@ -8,7 +8,6 @@ import 'arch/lifecycle_watcher_state.dart';
 import 'arch/provider_widget.dart';
 import 'entity/book_entity.dart';
 import 'book_view_model.dart';
-import 'entity/channel_event.dart';
 import 'generated/l10n.dart';
 
 class ReaderHomePage extends StatefulWidget {
@@ -244,13 +243,15 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
   }
 
   ///接收native端的更新请求
-  _receiveMessage() {
-    messageChannel.setMessageHandler((message) => Future<String>(() {
-          ChannelEvent event = ChannelEvent.fromJson(jsonDecode(message!));
-          switch (event.code) {
+  _receiveMessage(){
+    messageChannel.setMessageHandler((message) async => Future<String>(() {
+      var messageMap = jsonDecode(message!);
+      int code = messageMap['code'];
+      String data = messageMap['data'];
+          switch (code) {
             case 0:
             //分析回调
-              widget.callback(event.data!);
+              widget.callback(data);
               break;
             case 1:
               //更新列表
