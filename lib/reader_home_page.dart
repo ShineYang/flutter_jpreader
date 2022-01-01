@@ -106,7 +106,7 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
   _buildBookItem(BuildContext context, Book book) {
     ///处理无封面
     _buildBookCover(List<int>? elements) {
-      if (elements == null) {
+      if (elements == null || elements.isEmpty) {
         return Container(
           alignment: Alignment.topCenter,
           decoration: const BoxDecoration(
