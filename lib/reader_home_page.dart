@@ -274,8 +274,9 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
     String result = await viewModel!.removeBookFromLibrary(book.id.toString());
     if (result == "1") {
       ///删除成功
-      viewModel?.books.remove(book);
-      _update();
+      setState(() {
+        viewModel?.books.remove(book);
+      });
     }
   }
 
