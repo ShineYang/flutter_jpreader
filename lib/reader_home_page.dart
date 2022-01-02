@@ -234,8 +234,8 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
                 style: const TextStyle(color: Colors.redAccent, fontSize: 14),
               ),
               onPressed: () {
-                Navigator.of(context).pop(true);
                 _remove(book);
+                Navigator.of(context).pop(true);
               },
             )
           ],
