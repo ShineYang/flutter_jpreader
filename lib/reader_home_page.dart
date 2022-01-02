@@ -201,35 +201,41 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
   }
 
   Future<bool?> _showDeleteConfirmDialog(BuildContext context, Book book) {
+    var localizationContext = context;
     return showDialog<bool>(
       context: context,
+      useRootNavigator: false,
       builder: (context) {
         return AlertDialog(
           backgroundColor: Theme.of(context).colorScheme.background,
           title: Text(
-            S.of(context).confirmDeleteTitle,
-            style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 16),
+            S.of(localizationContext).confirmDeleteTitle,
+            style:
+                Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 16),
           ),
           content: Text(
-            S.of(context).confirmDelete,
+            S.of(localizationContext).confirmDelete,
             style: Theme.of(context).textTheme.bodyText1,
           ),
           actions: <Widget>[
             TextButton(
               child: Text(
-                S.of(context).cancel,
-                style: Theme.of(context).textTheme.subtitle1!.copyWith(fontSize: 14),
+                S.of(localizationContext).cancel,
+                style: Theme.of(context)
+                    .textTheme
+                    .subtitle1!
+                    .copyWith(fontSize: 14),
               ),
               onPressed: () => Navigator.of(context).pop(),
             ),
-
             TextButton(
               child: Text(
-                S.of(context).delete,
+                S.of(localizationContext).delete,
                 style: const TextStyle(color: Colors.redAccent, fontSize: 14),
               ),
               onPressed: () {
                 Navigator.of(context).pop(true);
+                _remove(book);
               },
             )
           ],
@@ -243,14 +249,14 @@ class _ReaderHomePageState extends LifecycleWatcherState<ReaderHomePage>
   }
 
   ///接收native端的更新请求
-  _receiveMessage(){
+  _receiveMessage() {
     messageChannel.setMessageHandler((message) async => Future<String>(() {
-      var messageMap = jsonDecode(message!);
-      int code = messageMap['code'];
-      String data = messageMap['data'];
+          var messageMap = jsonDecode(message!);
+          int code = messageMap['code'];
+          String data = messageMap['data'];
           switch (code) {
             case 0:
-            //分析回调
+              //分析回调
               widget.callback(data);
               break;
             case 1:
