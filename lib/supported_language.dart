@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 enum ReaderSupportedLanguage { zhSC, zhTC, en }
 
-extension SupportedLanguageValue on ReaderSupportedLanguage {
+extension ReaderSupportedLanguageValue on ReaderSupportedLanguage {
   String get identifier {
     switch (this) {
       case ReaderSupportedLanguage.zhSC:
