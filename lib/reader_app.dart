@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_jpreader/reader_home_page.dart';
 import 'package:flutter_jpreader/reader_theme_data.dart';
+import 'package:flutter_jpreader/supported_language.dart';
+import 'package:flutter_jpreader/utils.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'arch/lifecycle_watcher_state.dart';
@@ -32,6 +34,10 @@ class _ReaderAppPageState extends LifecycleWatcherState<ReaderAppPage>
   @override
   void initState() {
     super.initState();
+
+    if (ReaderUtils.currentStudyLanguage.hasValue == false) {
+      ReaderUtils.currentStudyLanguage.sink.add(ReaderSupportedLanguage.en);
+    }
   }
 
   @override
@@ -69,50 +75,63 @@ class _ReaderAppPageState extends LifecycleWatcherState<ReaderAppPage>
       brightness: Brightness.light,
     );
 
-    return MaterialApp(
-      localizationsDelegates: const [
-        S.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-      ],
-      supportedLocales: S.delegate.supportedLocales,
-      themeMode: ThemeMode.system,
-      theme: ThemeData(
-        colorScheme: lightColorScheme,
-        textTheme: const TextTheme(
-          headline1: TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-          bodyText1: TextStyle(
-              fontSize: 14,
-              color: Colors.black,
-              fontWeight: FontWeight.bold), //title
-          subtitle1: TextStyle(fontSize: 12), //author subtitle
-        ),
-      ),
-      darkTheme: ThemeData(
-        colorScheme: darkColorScheme,
-        textTheme: const TextTheme(
-          headline1: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-          bodyText1: TextStyle(
-              fontSize: 14,
-              color: Colors.white,
-              fontWeight: FontWeight.bold), //title
-          subtitle1: TextStyle(fontSize: 12), //author subtitle
-        ),
-      ),
-      home: ReaderHomePage(
-        callback: (content) {
-          widget.callback(content);
-        },
-      ),
-    );
+    return StreamBuilder<ReaderSupportedLanguage>(
+        stream: ReaderUtils.currentStudyLanguage,
+        builder: (BuildContext context,
+            AsyncSnapshot<ReaderSupportedLanguage> snapshot) {
+          if (snapshot.hasData == false) {
+            return Container();
+          } else {
+            return MaterialApp(
+              localizationsDelegates: const [
+                S.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+              ],
+              locale: snapshot.data?.locale,
+              supportedLocales: S.delegate.supportedLocales,
+              localeResolutionCallback: (locale, supportLocales) {
+                return snapshot.data?.locale;
+              },
+              themeMode: ThemeMode.system,
+              theme: ThemeData(
+                colorScheme: lightColorScheme,
+                textTheme: const TextTheme(
+                  headline1: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  bodyText1: TextStyle(
+                      fontSize: 14,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold), //title
+                  subtitle1: TextStyle(fontSize: 12), //author subtitle
+                ),
+              ),
+              darkTheme: ThemeData(
+                colorScheme: darkColorScheme,
+                textTheme: const TextTheme(
+                  headline1: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  bodyText1: TextStyle(
+                      fontSize: 14,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold), //title
+                  subtitle1: TextStyle(fontSize: 12), //author subtitle
+                ),
+              ),
+              home: ReaderHomePage(
+                callback: (content) {
+                  widget.callback(content);
+                },
+              ),
+            );
+          }
+        });
   }
 
   @override
