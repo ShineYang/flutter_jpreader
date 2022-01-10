@@ -34,6 +34,10 @@ class _ReaderAppPageState extends LifecycleWatcherState<ReaderAppPage>
   @override
   void initState() {
     super.initState();
+
+    if (ReaderUtils.currentStudyLanguage.hasValue == false) {
+      ReaderUtils.currentStudyLanguage.sink.add(ReaderSupportedLanguage.en);
+    }
   }
 
   @override
