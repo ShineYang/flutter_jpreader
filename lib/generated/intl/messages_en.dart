@@ -24,7 +24,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "appbarTitle": MessageLookupByLibrary.simpleMessage("Bookshelf"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
-        "confirmDelete": MessageLookupByLibrary.simpleMessage("将从书库中删除这本书"),
+        "confirmDelete":
+            MessageLookupByLibrary.simpleMessage("Delete this book?"),
         "confirmDeleteTitle": MessageLookupByLibrary.simpleMessage("Comfirm"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "emptyTips": MessageLookupByLibrary.simpleMessage("📖 Import EPUB file")

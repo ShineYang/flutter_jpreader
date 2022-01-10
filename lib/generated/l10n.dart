@@ -100,10 +100,10 @@ class S {
     );
   }
 
-  /// `将从书库中删除这本书`
+  /// `Delete this book?`
   String get confirmDelete {
     return Intl.message(
-      '将从书库中删除这本书',
+      'Delete this book?',
       name: 'confirmDelete',
       desc: '',
       args: [],
