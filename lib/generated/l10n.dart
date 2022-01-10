@@ -50,50 +50,50 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `书架`
+  /// `Bookshelf`
   String get appbarTitle {
     return Intl.message(
-      '书架',
+      'Bookshelf',
       name: 'appbarTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `📖 打开 EPUB 文件以导入`
+  /// `📖 Import EPUB file`
   String get emptyTips {
     return Intl.message(
-      '📖 打开 EPUB 文件以导入',
+      '📖 Import EPUB file',
       name: 'emptyTips',
       desc: '',
       args: [],
     );
   }
 
-  /// `取消`
+  /// `Cancel`
   String get cancel {
     return Intl.message(
-      '取消',
+      'Cancel',
       name: 'cancel',
       desc: '',
       args: [],
     );
   }
 
-  /// `删除`
+  /// `Delete`
   String get delete {
     return Intl.message(
-      '删除',
+      'Delete',
       name: 'delete',
       desc: '',
       args: [],
     );
   }
 
-  /// `请确认`
+  /// `Comfirm`
   String get confirmDeleteTitle {
     return Intl.message(
-      '请确认',
+      'Comfirm',
       name: 'confirmDeleteTitle',
       desc: '',
       args: [],
